@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BlackBoard : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class BlackBoard : MonoBehaviour
         VariableDictionary = new Dictionary<VariableType, FloatValue>();
         foreach(var v in floatVariables)
         {
-            VariableDictionary.Add(v.Type, v);
+            if (!VariableDictionary.ContainsKey(v.Type))
+                VariableDictionary.Add(v.Type, v);
         }
     }
 
@@ -32,18 +34,16 @@ public class BlackBoard : MonoBehaviour
         }
         return null;
     }
-    //public bool GetBoolVariableValue(string name, out bool result)
-    //{
-    //    var res = floatVariables.Find(x => x.name == name);
-    //    if (res != null)
-    //    {
-    //        result = res.Value;
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        result = 0;
-    //        return false;
-    //    }
-    //}
+    public bool GetBoolVariableValue(string name)
+    {
+        var res = floatVariables.Find(x => x.name == name);
+        if (res != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

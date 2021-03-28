@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class PatrolBehaviour : AIBehaviour
 {
-
+    private bool walking = false;
+    Vector3 targetLocation;
 
     public override void Execute()
     {
-        Debug.Log("Patrolling!");
+        if (!walking)
+        {
+            targetLocation = new Vector3(Random.Range(-50f, 50f), 0, Random.Range(-50f, 50f));
+            navAgent.SetDestination(targetLocation);
+            walking = true;
+        }
+        else if(Vector3.Distance(transform.position, targetLocation) < 5)
+        {
+            walking = false;
+        }
     }
 }

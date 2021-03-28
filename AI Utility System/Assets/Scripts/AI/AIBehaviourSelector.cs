@@ -3,7 +3,7 @@ using UnityEngine;
 public class AIBehaviourSelector : MonoBehaviour
 {
     private AIBehaviour[] behaviours;
-    private AIBehaviour currentBehaviour;
+    public AIBehaviour currentBehaviour;
 
     public void OnInitialize(BlackBoard bb)
     {
@@ -28,7 +28,9 @@ public class AIBehaviourSelector : MonoBehaviour
 
     public void OnUpdate()
     {
+        EvaluateBehaviours();
         currentBehaviour?.Execute();
+        //Debug.Log(currentBehaviour);
     }
 
 }

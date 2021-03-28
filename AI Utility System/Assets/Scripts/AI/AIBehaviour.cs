@@ -1,16 +1,20 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class AIBehaviour : MonoBehaviour
 {
-    [SerializeField] public UtilityEvaluator[] utilities; 
-     
+    [SerializeField] public UtilityEvaluator[] utilities;
+
+    protected NavMeshAgent navAgent;
+
     public void OnInitialize(BlackBoard bb)
     {
         foreach(var utility in utilities)
         {
             utility.OnInitialize(bb);
         }
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
     public float GetNormalizedScore()
